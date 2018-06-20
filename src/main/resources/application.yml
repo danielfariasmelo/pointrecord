@@ -1,0 +1,15 @@
+# Initial settings for this application
+server:
+  servlet:
+    context-path: /pointrecord
+  port: 8080
+
+# Initial settings for the log system
+logging:
+    file: ${spring.application.name}.log
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+        springframework:
+          cloud: DEBUG
