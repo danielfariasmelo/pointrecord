@@ -4,7 +4,17 @@ server:
     context-path: /pointrecord
   port: 8080
 
-# Initial settings for the log system
+# Settings spring
+spring:
+  application:
+    name: pointrecord
+  datasource:
+    url: jdbc:h2:file:~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+# Settings for the log system
 logging:
     file: ${spring.application.name}.log
     level:
