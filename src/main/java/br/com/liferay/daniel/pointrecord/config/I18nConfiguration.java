@@ -10,7 +10,7 @@ public class I18nConfiguration {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         final ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-        source.setBasename("classpath:i18n/point/messages");
+        source.setBasename("classpath:i18n/messages");
         source.setDefaultEncoding("UTF-8");
         source.setUseCodeAsDefaultMessage(true);
         return source;

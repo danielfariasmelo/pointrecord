@@ -13,6 +13,9 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
 
 # Settings for the log system
 logging:
