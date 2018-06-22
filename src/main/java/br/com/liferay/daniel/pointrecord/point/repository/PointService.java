@@ -5,6 +5,8 @@ import br.com.liferay.daniel.pointrecord.domain.Point;
 import br.com.liferay.daniel.pointrecord.domain.User;
 import br.com.liferay.daniel.pointrecord.user.repository.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service  public class PointService {
@@ -20,12 +22,12 @@ import org.springframework.stereotype.Service;
      * @param clockin
      * @return point object
      */
-    public Point register(Clockin clockin) {
+    public ResponseEntity<Point> register(Clockin clockin) {
 
         final User user = userService.findById(clockin.getPis());
 
         final Point point = new Point(clockin.getDateTime(),user);
 
-        return pointRepository.save(point);
+        return new ResponseEntity<>(pointRepository.save(point),HttpStatus.OK);
     }
 }

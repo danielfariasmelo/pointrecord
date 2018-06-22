@@ -1,5 +1,6 @@
 package br.com.liferay.daniel.pointrecord.exception;
 
+import br.com.liferay.daniel.pointrecord.domain.Point;
 import br.com.liferay.daniel.pointrecord.domain.UnknownError;
 import br.com.liferay.daniel.pointrecord.exception.repository.PointExceptionService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
 import java.util.UUID;
@@ -24,7 +26,8 @@ public class PointRecordExceptionHandler {
     private PointExceptionService pointExceptionService;
 
     @ExceptionHandler
-    protected ResponseEntity<String> handleException(final Exception ex) {
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error in the process")
+    protected String handleException(final Exception ex) {
 
         final UnknownError unknownError = new UnknownError();
         unknownError.setUuid(UUID.randomUUID().toString());
@@ -40,6 +43,6 @@ public class PointRecordExceptionHandler {
             message = ex.getMessage();
         }
 
-        return new ResponseEntity<>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+        return message;
     }
 }

@@ -3,11 +3,12 @@ package br.com.liferay.daniel.pointrecord.domain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "UNKNOWN_ERROR")
-public class UnknownError {
+public class UnknownError implements Serializable {
 
     @Id
     private String uuid;

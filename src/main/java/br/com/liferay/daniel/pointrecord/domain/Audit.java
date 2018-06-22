@@ -1,4 +1,6 @@
 package br.com.liferay.daniel.pointrecord.domain;
 
-public class Audit {
+import java.io.Serializable;
+
+public class Audit implements Serializable {
 }

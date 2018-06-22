@@ -1,14 +1,16 @@
 package br.com.liferay.daniel.pointrecord.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "POINT")
-public class Point {
+public class Point implements Serializable {
 
     @GenericGenerator(
             name = "pointSequenceGenerator",
@@ -27,6 +29,9 @@ public class Point {
 
     @ManyToOne (optional = false)
     private User user;
+
+    public Point() {
+    }
 
     public Point(LocalDateTime dateTime, User user) {
         this.dateTime = dateTime;

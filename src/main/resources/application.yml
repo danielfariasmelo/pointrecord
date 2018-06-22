@@ -26,3 +26,6 @@ logging:
           SQL: DEBUG
         springframework:
           cloud: DEBUG
+
+definitions:
+  none:
