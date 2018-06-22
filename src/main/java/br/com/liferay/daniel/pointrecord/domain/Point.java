@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "POINT")
@@ -22,11 +22,16 @@ public class Point {
     @GeneratedValue(generator = "pointSequenceGenerator")
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar dateTime;
+    @Column
+    private LocalDateTime dateTime;
 
-    @ManyToOne
+    @ManyToOne (optional = false)
     private User user;
+
+    public Point(LocalDateTime dateTime, User user) {
+        this.dateTime = dateTime;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -36,11 +41,11 @@ public class Point {
         this.id = id;
     }
 
-    public Calendar getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Calendar dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

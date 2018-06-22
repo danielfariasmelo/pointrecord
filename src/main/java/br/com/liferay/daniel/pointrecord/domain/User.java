@@ -1,5 +1,7 @@
 package br.com.liferay.daniel.pointrecord.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,16 +12,22 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    private Long pis;
+    private String pis;
 
     @Column
     private String name;
 
-    public Long getPis() {
+    @Column
+    private String password;
+
+    @Column
+    private Boolean enabled;
+
+    public String getPis() {
         return pis;
     }
 
-    public void setPis(Long pis) {
+    public void setPis(String pis) {
         this.pis = pis;
     }
 
@@ -29,5 +37,21 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
