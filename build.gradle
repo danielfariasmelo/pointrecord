@@ -26,14 +26,15 @@ dependencies {
 	/* ====================================== Web dependencies ====================================================== */
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'org.springframework.boot:spring-boot-starter-tomcat'
-
+	compile 'org.apache.commons:commons-lang3:3.0'
+	/* ====================================== Security dependencies ================================================= */
+	compile 'org.springframework.boot:spring-boot-starter-security'
 	/* ====================================== Database dependencies ================================================= */
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-	/* ====================================== Metrics dependencies ================================================= */
+	compile 'com.h2database:h2:1.4.197'
+	/* ====================================== Metrics dependencies ================================================== */
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
 	compile 'com.codahale.metrics:metrics-core:3.0.2'
-
 	/* ====================================== Test dependencies ===================================================== */
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
