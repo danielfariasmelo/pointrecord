@@ -10,9 +10,4 @@ public class WorkCalculatorSaturday extends WorkCalculatorAbstract {
         return 0D;
     }
 
-    @Override
-    public Double getFactorRest() {
-        return 0D;
-    }
-
 }

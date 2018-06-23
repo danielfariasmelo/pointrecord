@@ -10,6 +10,8 @@ public class UserWork {
 
     private Double rest = 0D;
 
+    private Double restRequired = 0D;
+
     public LocalDate getDate() {
         return date;
     }
@@ -32,5 +34,13 @@ public class UserWork {
 
     public void setRest(Double rest) {
         this.rest = rest;
+    }
+
+    public Double getRestRequired() {
+        return restRequired;
+    }
+
+    public void setRestRequired(Double restRequired) {
+        this.restRequired = restRequired;
     }
 }
