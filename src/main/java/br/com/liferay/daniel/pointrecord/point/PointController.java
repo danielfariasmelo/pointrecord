@@ -2,16 +2,16 @@ package br.com.liferay.daniel.pointrecord.point;
 
 import br.com.liferay.daniel.pointrecord.domain.Clockin;
 import br.com.liferay.daniel.pointrecord.domain.Point;
+import br.com.liferay.daniel.pointrecord.domain.User;
 import br.com.liferay.daniel.pointrecord.point.repository.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.transaction.annotation.Isolation.REPEATABLE_READ;
 
@@ -27,5 +27,18 @@ public class PointController {
     public ResponseEntity<Point> register (@RequestBody Clockin clockin){
         return pointService.register(clockin);
     }
+
+    @GetMapping(value = "/all")
+    public String qweqweq (){
+        return "teste";
+    }
+
+
+    @GetMapping(value = "/all/registers/users/{pis}")
+    public List<Point> findAllRegistersByUser (@PathVariable String pis){
+        return pointService.findAllByUser(pis);
+    }
+
+
 
 }

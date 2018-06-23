@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service  public class PointService {
 
@@ -66,5 +67,18 @@ import java.time.format.DateTimeFormatter;
             throw new PointRecordException(messageSource.getMessage("register.invalid.time",
                     new String[]{}, LocaleContextHolder.getLocale()));
         }
+    }
+
+    /**
+     * Listing all records per user
+     *
+     * @param pis
+     * @return
+     */
+    public List<Point> findAllByUser(final String pis) {
+        final User user = userService.findById(pis);
+
+        return pointRepository.findAllByUser(user);
+
     }
 }

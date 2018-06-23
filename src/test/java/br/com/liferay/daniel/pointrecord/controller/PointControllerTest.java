@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @PointTest
 @Sql(value = "classpath:point_clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -39,6 +41,8 @@ public class PointControllerTest {
                 .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        assertThat(createRegister.getBody()).isNotNull();
+        assertThat(createRegister.getBody().getId()).isNotNull();
         TestPrint.printTest(createRegister);
     }
 
@@ -55,6 +59,7 @@ public class PointControllerTest {
                 .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, createRegister.getStatusCode());
+        assertThat(createRegister.getBody().getId()).isNull();
         TestPrint.printTest(createRegister);
     }
 
@@ -70,6 +75,8 @@ public class PointControllerTest {
                 .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        assertThat(createRegister.getBody()).isNotNull();
+        assertThat(createRegister.getBody().getId()).isNotNull();
         TestPrint.printTest(createRegister);
 
 
@@ -99,6 +106,8 @@ public class PointControllerTest {
                 .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        assertThat(createRegister.getBody()).isNotNull();
+        assertThat(createRegister.getBody().getId()).isNotNull();
         TestPrint.printTest(createRegister);
 
 
@@ -128,6 +137,8 @@ public class PointControllerTest {
                 .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        assertThat(createRegister.getBody()).isNotNull();
+        assertThat(createRegister.getBody().getId()).isNotNull();
         TestPrint.printTest(createRegister);
 
 

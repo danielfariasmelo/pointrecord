@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository interface PointRepository extends JpaRepository <Point,Long> {
 
@@ -15,4 +16,5 @@ import java.time.LocalDateTime;
 
     Boolean existsPointByUserAndDateTime (final User user, final LocalDateTime localDateTime);
 
+    List<Point> findAllByUser(final User user);
 }
