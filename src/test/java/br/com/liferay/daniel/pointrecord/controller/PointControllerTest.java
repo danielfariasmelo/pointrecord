@@ -23,6 +23,9 @@ public class PointControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    private static String API_POINT_CREATE = "/api/clockin/create";
+
+
     @Test
     public void createRegisterSuccessfullyTest() throws Exception {
 
@@ -33,14 +36,14 @@ public class PointControllerTest {
         HttpEntity<Clockin> entityReq = new HttpEntity<>(clockin, SecurityTest.getHeader());
 
         ResponseEntity<Point> createRegister = restTemplate
-                .exchange("/api/clockin/create", HttpMethod.POST, entityReq, Point.class);
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
         TestPrint.printTest(createRegister);
     }
 
     @Test
-    public void createRegisterUnSuccessfullyTest() throws Exception {
+    public void createRegisterWithoutUserUnSuccessfullyTest() throws Exception {
 
         final Clockin clockin = new Clockin();
         clockin.setDateTime(LocalDateTime.now());
@@ -49,7 +52,7 @@ public class PointControllerTest {
         HttpEntity<Clockin> entityReq = new HttpEntity<>(clockin, SecurityTest.getHeader());
 
         ResponseEntity<Point> createRegister = restTemplate
-                .exchange("/api/clockin/create", HttpMethod.POST, entityReq, Point.class);
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
 
         Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, createRegister.getStatusCode());
         TestPrint.printTest(createRegister);
@@ -57,19 +60,82 @@ public class PointControllerTest {
 
     @Test
     public void createRegisterLimitTimeUnSuccessfullyTest() throws Exception {
+        final Clockin clockin = new Clockin();
+        clockin.setDateTime(LocalDateTime.now());
+        clockin.setPis("12083924837");
 
+        HttpEntity<Clockin> entityReq = new HttpEntity<>(clockin, SecurityTest.getHeader());
+
+        ResponseEntity<Point> createRegister = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
+
+        Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        TestPrint.printTest(createRegister);
+
+
+        final Clockin clockinError = new Clockin();
+        clockinError.setDateTime(LocalDateTime.now());
+        clockinError.setPis("12083924837");
+
+        HttpEntity<Clockin> entityReqError = new HttpEntity<>(clockinError, SecurityTest.getHeader());
+
+        ResponseEntity<Point> createRegisterError = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReqError, Point.class);
+
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, createRegisterError.getStatusCode());
+        TestPrint.printTest(createRegisterError);
 
     }
 
     @Test
     public void createRegisterLimitTimeSuccessfullyTest() throws Exception {
+        final Clockin clockin = new Clockin();
+        clockin.setDateTime(LocalDateTime.now());
+        clockin.setPis("12083924837");
 
+        HttpEntity<Clockin> entityReq = new HttpEntity<>(clockin, SecurityTest.getHeader());
+
+        ResponseEntity<Point> createRegister = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
+
+        Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        TestPrint.printTest(createRegister);
+
+
+        final Clockin clockinError = new Clockin();
+        clockinError.setDateTime(LocalDateTime.now().plusMinutes(1));
+        clockinError.setPis("12083924837");
+
+        HttpEntity<Clockin> entityReqError = new HttpEntity<>(clockinError, SecurityTest.getHeader());
+
+        ResponseEntity<Point> createRegisterError = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReqError, Point.class);
+
+        Assert.assertEquals(HttpStatus.OK, createRegisterError.getStatusCode());
+        TestPrint.printTest(createRegisterError);
 
     }
 
     @Test
-    public void createRegisterExistSuccessfullyTest() throws Exception {
+    public void createRegisterExistUnSuccessfullyTest() throws Exception {
+        final Clockin clockin = new Clockin();
+        clockin.setDateTime(LocalDateTime.now());
+        clockin.setPis("12083924837");
 
+        HttpEntity<Clockin> entityReq = new HttpEntity<>(clockin, SecurityTest.getHeader());
+
+        ResponseEntity<Point> createRegister = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
+
+        Assert.assertEquals(HttpStatus.OK, createRegister.getStatusCode());
+        TestPrint.printTest(createRegister);
+
+
+        ResponseEntity<Point> createRegisterError = restTemplate
+                .exchange(API_POINT_CREATE, HttpMethod.POST, entityReq, Point.class);
+
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, createRegisterError.getStatusCode());
+        TestPrint.printTest(createRegisterError);
 
     }
 
