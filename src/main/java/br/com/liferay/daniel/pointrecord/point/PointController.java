@@ -28,12 +28,6 @@ public class PointController {
         return pointService.register(clockin);
     }
 
-    @GetMapping(value = "/all")
-    public String qweqweq (){
-        return "teste";
-    }
-
-
     @GetMapping(value = "/all/registers/users/{pis}")
     public List<Point> findAllRegistersByUser (@PathVariable String pis){
         return pointService.findAllByUser(pis);
