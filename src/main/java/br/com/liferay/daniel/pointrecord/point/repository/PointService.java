@@ -70,7 +70,7 @@ import java.util.List;
     }
 
     /**
-     * Listing all records per user
+     * Listing all records per user pis
      *
      * @param pis
      * @return
@@ -78,7 +78,18 @@ import java.util.List;
     public List<Point> findAllByUser(final String pis) {
         final User user = userService.findById(pis);
 
-        return pointRepository.findAllByUser(user);
+        return findAllByUser(user);
 
     }
+
+    /**
+     * Listing all records per user
+     *
+     * @param user
+     * @return
+     */
+    public List<Point> findAllByUser (User user){
+        return pointRepository.findAllByUser(user);
+    }
+
 }

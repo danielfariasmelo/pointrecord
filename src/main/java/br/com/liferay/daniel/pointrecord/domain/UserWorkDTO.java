@@ -4,9 +4,9 @@ public class UserWorkDTO {
 
     private User user;
 
-    private Double work;
+    private Double work = 0D;
 
-    private Double rest;
+    private Double rest = 0D;
 
     public User getUser() {
         return user;
