@@ -1,19 +1,21 @@
 package br.com.liferay.daniel.pointrecord.domain;
 
-public class UserWorkDTO {
+import java.time.LocalDate;
 
-    private User user;
+public class UserWork {
+
+    private LocalDate date;
 
     private Double work = 0D;
 
     private Double rest = 0D;
 
-    public User getUser() {
-        return user;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Double getWork() {

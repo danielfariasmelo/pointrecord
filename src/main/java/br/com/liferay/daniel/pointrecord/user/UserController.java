@@ -1,6 +1,6 @@
 package br.com.liferay.daniel.pointrecord.user;
 
-import br.com.liferay.daniel.pointrecord.domain.UserWorkDTO;
+import br.com.liferay.daniel.pointrecord.domain.ResultDTO;
 import br.com.liferay.daniel.pointrecord.user.repository.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,9 +19,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/{pis}/works/{periodIni}/{periodFin}")
-    private UserWorkDTO calculateWork (@PathVariable String pis,
-                                       @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate periodIni ,
-                                       @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate periodFin){
+    private ResultDTO calculateWork (@PathVariable String pis,
+                                     @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate periodIni ,
+                                     @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate periodFin){
         return userService.calculateWorkUser(pis,periodIni,periodFin);
     }
 

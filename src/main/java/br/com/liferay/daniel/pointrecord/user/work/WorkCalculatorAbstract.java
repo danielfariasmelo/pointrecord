@@ -1,36 +1,54 @@
 package br.com.liferay.daniel.pointrecord.user.work;
 
-import br.com.liferay.daniel.pointrecord.domain.UserWorkDTO;
+import br.com.liferay.daniel.pointrecord.domain.UserWork;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class WorkCalculatorAbstract implements WorkCalculator {
 
     @Override
-    public UserWorkDTO calculate(List<LocalDateTime> registers) {
-        final UserWorkDTO userWorkDTO = new UserWorkDTO();
+    public UserWork calculate(List<LocalDateTime> registers) {
+        final UserWork userWork = new UserWork();
+        LocalDateTime registerInitial = null;
+        LocalDateTime registerFinal = null;
 
-        registers.stream().forEach(register -> {
+        for (int i = 0; i<registers.size(); i++){
 
-            this.getFactorWork();
-            this.getFactorRest();
+            if(i % 2 ==0){
+                registerInitial = registers.get(i);
 
-            userWorkDTO.setWork(userWorkDTO.getWork() + 0D);
-            userWorkDTO.setRest(userWorkDTO.getRest() + 0D);
+            }else{
+                registerFinal = registers.get(i);
+            }
 
-        });
+            if(registerFinal!=null){
+                userWork.setDate(registers.get(i).toLocalDate());
 
-        return userWorkDTO;
+                if(registerFinal.getHour()>= 22 || (registerInitial.getHour() >= 0 && registerInitial.getHour()<=6)) {
+                    final Duration duration = Duration.between(registerInitial,registerFinal);
+                    userWork.setWork(userWork.getWork() + (duration.toMinutes() * 1.2));
+                }else{
+                    final Duration duration = Duration.between(registerInitial,registerFinal);
+                    userWork.setWork(userWork.getWork() + duration.toMinutes());
+                }
+                registerFinal = null;
+            }
+
+        }
+
+        return userWork;
     }
+
 
     @Override
     public Double getFactorWork() {
-        return 0D;
+        return 1.0;
     }
 
     @Override
     public Double getFactorRest() {
-        return 0D;
+        return 1.0;
     }
 }
