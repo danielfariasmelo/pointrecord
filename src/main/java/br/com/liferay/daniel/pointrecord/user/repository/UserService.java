@@ -17,11 +17,17 @@ import java.util.Optional;
     @Autowired
     private MessageSource messageSource;
 
+    /**
+     * This method checks for a valid user
+     *
+     * @param pis
+     * @return valid user
+     */
     public User findById(final String pis) {
        final Optional<User> user = userRepository.findById(pis);
 
         if (!user.isPresent())
-            throw new PointRecordException(messageSource.getMessage("system.information",
+            throw new PointRecordException(messageSource.getMessage("user.not.found",
                     new String[]{pis}, LocaleContextHolder.getLocale()));
 
         return user.get();
