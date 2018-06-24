@@ -11,5 +11,6 @@ public interface WorkCalculator {
 
     Double getFactorWork();
 
+    Double calculateRequiredRest(final Double work , final Double rest);
 
 }

@@ -7,7 +7,7 @@ public class WorkCalculatorSaturday extends WorkCalculatorAbstract {
 
     @Override
     public Double getFactorWork() {
-        return 0D;
+        return 1.5D;
     }
 
 }

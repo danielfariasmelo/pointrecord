@@ -8,6 +8,12 @@ import java.util.List;
 
 public class WorkCalculatorAbstract implements WorkCalculator {
 
+    private static Double WORK_MIN = 240D;
+    private static Double WORK_MAX = 360D;
+
+    private static Double REST_WORK_MIN = 15D;
+    private static Double REST_WORK_MAX = 15D;
+
     @Override
     public UserWork calculate(final List<LocalDateTime> registers) {
         final UserWork userWork = new UserWork();
@@ -36,12 +42,12 @@ public class WorkCalculatorAbstract implements WorkCalculator {
                 if(registerFinal.getHour()>= 22 || (registerInitial.getHour() >= 0 && registerInitial.getHour()<=6)) {
 
                     final Duration duration = Duration.between(registerInitial,registerFinal);
-                    userWork.setWork(userWork.getWork() + (duration.toMinutes() * 1.2));
+                    userWork.setWork(userWork.getWork() + (duration.toMinutes() * 1.2 * getFactorWork()));
 
                 }else{
 
                     final Duration duration = Duration.between(registerInitial,registerFinal);
-                    userWork.setWork(userWork.getWork() + duration.toMinutes());
+                    userWork.setWork(userWork.getWork() + (duration.toMinutes() * getFactorWork()));
 
                 }
             }
@@ -52,13 +58,18 @@ public class WorkCalculatorAbstract implements WorkCalculator {
         return userWork;
     }
 
+    @Override
     public Double calculateRequiredRest(final Double work , final Double rest){
         Double restRequired = 0D;
 
-        if(work > 4 && work <= 6){
-            restRequired = 15D;
-        }else if( work > 6){
-            restRequired = 60D;
+        if(work > WORK_MIN && work <= WORK_MAX){
+
+            restRequired = REST_WORK_MIN;
+
+        }else if( work > WORK_MAX){
+
+            restRequired = REST_WORK_MAX;
+
         }
 
         final Double totalRestCalculate = restRequired - rest;
