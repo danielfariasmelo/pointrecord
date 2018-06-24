@@ -12,7 +12,7 @@ public class WorkCalculatorAbstract implements WorkCalculator {
     private static Double WORK_MAX = 360D;
 
     private static Double REST_WORK_MIN = 15D;
-    private static Double REST_WORK_MAX = 15D;
+    private static Double REST_WORK_MAX = 60D;
 
     @Override
     public UserWork calculate(final List<LocalDateTime> registers) {
@@ -39,10 +39,29 @@ public class WorkCalculatorAbstract implements WorkCalculator {
 
             if(registerFinal!=null){
 
-                if(registerFinal.getHour()>= 22 || (registerInitial.getHour() >= 0 && registerInitial.getHour()<=6)) {
+                if(registerFinal.getHour() >= 22){
 
-                    final Duration duration = Duration.between(registerInitial,registerFinal);
-                    userWork.setWork(userWork.getWork() + (duration.toMinutes() * 1.2 * getFactorWork()));
+                    final Duration duration = Duration.between(registerInitial, registerFinal.withHour(22).withMinute(0).withSecond(0));
+                    final Duration durationExtra = Duration.between(registerFinal.withHour(22).withMinute(0).withSecond(0),registerFinal);
+
+                    userWork.setWork(userWork.getWork()
+                            + (duration.toMinutes() * getFactorWork())
+                            + (durationExtra.toMinutes() * 1.2 * getFactorWork()));
+
+                }else if(registerInitial.getHour() >= 0 && registerInitial.getHour()<=6){
+
+                    if(registerFinal.getHour()>6){
+                        final Duration durationExtra = Duration.between(registerInitial,registerInitial.withHour(6).withMinute(0).withSecond(0));
+                        final Duration duration = Duration.between(registerInitial.withHour(6).withMinute(0).withSecond(0),registerFinal);
+                        userWork.setWork(userWork.getWork()
+                                + (duration.toMinutes() * getFactorWork())
+                                + (durationExtra.toMinutes() * 1.2 * getFactorWork()));
+
+                    }else{
+                        final Duration duration = Duration.between(registerInitial,registerFinal);
+                        userWork.setWork(userWork.getWork()
+                                + (duration.toMinutes() * 1.2 * getFactorWork()));
+                    }
 
                 }else{
 
