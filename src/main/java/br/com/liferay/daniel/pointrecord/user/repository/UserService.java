@@ -34,10 +34,12 @@ import java.util.stream.Collectors;
     private PointService pointService;
 
     /**
-     * This method checks for a valid user
+     * This method aims to find a valid user in the system database through the parameter pis passed in this method.
+     * In addition, validation will occur for cases where there are no users in the database thus returning a runtime
+     * exception handled by the PointRecordException.
      *
      * @param pis
-     * @return valid user
+     * @return The object User
      */
     public User findById(final String pis) {
         final Optional<User> user = userRepository.findById(pis);
@@ -49,6 +51,18 @@ import java.util.stream.Collectors;
         return user.get();
     }
 
+    /**
+     * This method has the purpose of calculating hours worked according to the user and the period passed by parameter
+     * for this method. In addition to performing the calculation of the hours worked, the calculation of the necessary
+     * rest of the user is performed. Finally a ResultDTO object will be returned that contains all the data related to
+     * the searched user and a list of details about the hours worked and their respective breaks.
+     *
+     *
+     * @param pis
+     * @param periodIni
+     * @param periodFin
+     * @return The object ResultDTO with contains the User, a list of UserWork and required time rest.
+     */
     public ResultDTO calculateWorkUser(String pis, LocalDate periodIni, LocalDate periodFin) {
         final ResultDTO resultDTO = new ResultDTO();
         resultDTO.setUser(findById(pis));

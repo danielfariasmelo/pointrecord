@@ -21,8 +21,13 @@ public class UserWorkFactory {
     @Qualifier("WorkCalculatorWeek")
     private WorkCalculator workCalculatorWeek;
 
-
-        public WorkCalculator getWorkCalculator (final LocalDateTime localDateTime){
+    /**
+     * This method returns the specific calculator to perform the calculation of the hours worked according to the day
+     * of the week. Returns an object of type WorkCalculator.
+     * @param localDateTime
+     * @return The object WorkCalculator
+     */
+    public WorkCalculator getWorkCalculator (final LocalDateTime localDateTime){
 
             switch (localDateTime.getDayOfWeek()){
 
