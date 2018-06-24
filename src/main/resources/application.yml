@@ -27,5 +27,3 @@ logging:
         springframework:
           cloud: DEBUG
 
-definitions:
-  none:

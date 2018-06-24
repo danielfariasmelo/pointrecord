@@ -21,12 +21,23 @@ public class WebBasicSecurityConfiguration extends WebSecurityConfigurerAdapter 
     @Autowired
     private DataSource dataSource;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
                 .authorizeRequests()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -45,7 +56,8 @@ public class WebBasicSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/console/**"); // everything is open until we lock it down (currently waiting on EU web)
+        web.ignoring()
+                .antMatchers("/console/**");
     }
 
     @Bean
