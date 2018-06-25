@@ -1,6 +1,8 @@
 package br.com.liferay.daniel.pointrecord.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class UserWork {
 
@@ -11,6 +13,8 @@ public class UserWork {
     private Double rest = 0D;
 
     private Double restRequired = 0D;
+
+    private List<LocalDateTime> pointList;
 
     public LocalDate getDate() {
         return date;
@@ -38,6 +42,14 @@ public class UserWork {
 
     public Double getRestRequired() {
         return restRequired;
+    }
+
+    public List<LocalDateTime> getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(List<LocalDateTime> pointList) {
+        this.pointList = pointList;
     }
 
     public void setRestRequired(Double restRequired) {

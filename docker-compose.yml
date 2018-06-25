@@ -1,0 +1,14 @@
+version: '2'
+services:
+  point_service:
+    build: ./
+    image: pointrecord/clockin
+    container_name: clockin
+    ports:
+      - "8080:8080" # HTTP port
+    volumes:
+      - ./config:/app/config
+    mem_limit: 512m
+    restart: always
+    environment:
+      - JAVA_OPTS=-Xmx512m
