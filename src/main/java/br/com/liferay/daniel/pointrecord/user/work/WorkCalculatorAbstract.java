@@ -27,6 +27,7 @@ public class WorkCalculatorAbstract implements WorkCalculator {
     public UserWork calculate(final List<LocalDateTime> registers) {
         final UserWork userWork = new UserWork();
         userWork.setDate(registers.get(0).toLocalDate());
+        userWork.setPointList(registers);
         LocalDateTime registerInitial = null;
         LocalDateTime registerFinal = null;
 
