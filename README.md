@@ -5,8 +5,8 @@ System responsible for performing point record control.
 For the execution of this project, the following instructions should be followed:
 
 # Prerequisites
-1 Download and install Java (JDK) 8 (if necessary) in your local environment.
-2 Clone this project with https://github.com/danielfariasmelo/pointrecord.git
+<p> Download and install Java (JDK) 8 (if necessary) in your local environment. </p>
+<p> Clone this project with https://github.com/danielfariasmelo/pointrecord.git </p>
 
 # Deployment
 Gradle - Dependency Management
